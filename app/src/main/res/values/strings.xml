@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">zipCode</string>
+    <string name="app_name">App Busca CEP IFSP</string>
+    <string name="type_zip_code">Digite o CEP aqui</string>
+    <string name="search">Pesquisar</string>
+    <string name="type_valid_zipcode">Por favor, insira um CEP válido!</string>
+    <string name="success">Busca realizada com sucesso...</string>
+    <string name="error1">Erro CEP:</string>
+    <string name="error2">Erro ao buscar o cep:</string>
+    <string name="no_zip">CEP inexistente!</string>
 </resources>

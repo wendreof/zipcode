@@ -19,14 +19,16 @@ import wendreo.design.R;
 import wendreo.design.models.ZipCode;
 import wendreo.design.retrofit.RetrofitConfig;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity
+		implements View.OnClickListener {
 	
-	private EditText cep;
-	private TextView resposta;
-	private LinearLayout linearLayout;
+	private EditText editTextZipCode;
+	private TextView textViewResponse;
+	private LinearLayout LinearLayout;
 	
 	@Override
-	protected void onCreate ( Bundle savedInstanceState ) {
+	protected void onCreate ( Bundle savedInstanceState )
+	{
 		super.onCreate ( savedInstanceState );
 		setContentView ( R.layout.activity_main );
 		
@@ -34,56 +36,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 	
 	private void findViewByIds ( ) {
-		cep = findViewById ( R.id.etMain_cep );
-		resposta = findViewById ( R.id.etMain_resposta );
-		Button btnBuscarCep = findViewById ( R.id.btnMain_buscarCep );
-		linearLayout = findViewById ( R.id.LinearLayout );
-		btnBuscarCep.setOnClickListener ( this );
+		editTextZipCode = findViewById ( R.id.editTextZipCode );
+		textViewResponse = findViewById ( R.id.textViewResponse );
+		Button btnSearch = findViewById ( R.id.btnSearch );
+		LinearLayout = findViewById ( R.id.LinearLayout );
+		btnSearch.setOnClickListener ( this );
 	}
 	
 	@Override
-	public void onClick ( View view ) {
-		String mcep = cep.getText ().toString ();
+	public void onClick ( View view )
+	{
+		String zip = editTextZipCode.getText ( ).toString ( );
 		
-		if (mcep.equals("") || mcep.length () < 9)
+		if ( zip.equals ( "" ) || zip.length ( ) < 9 )
 		{
-			cep.setError ( "Por favor, insira um CEP válido!" );
+			editTextZipCode.setError ( getString( R.string.type_valid_zipcode) );
 		}
 		else
+		{
+		if ( view.getId ( ) == R.id.btnSearch )
+		{
+			Call< ZipCode > call = new RetrofitConfig ( ).getCEPService ( )
+					.buscarCEP ( zip );
+			call.enqueue ( new Callback< ZipCode > ( )
 			{
-			if ( view.getId ( ) == R.id.btnMain_buscarCep )
-			{
-				Call< ZipCode > call = new RetrofitConfig ( ).getCEPService ( ).buscarCEP ( cep.getText ( ).toString ( ) );
-				call.enqueue ( new Callback< ZipCode > ( ) {
-					@Override
-					public void onResponse ( Call< ZipCode > call, Response< ZipCode > response ) {
-						ZipCode cep = response.body ( );
-						try {
-							ShowMSG ( "Busca realizada com suceso...", 1);
-							resposta.setText ( cep.toString ( ) );
-						} catch ( Exception e ) {
-							Log.e ("Erro CEP:", "Erro ao buscar o cep:" + e.getMessage ( ) );
+				@Override
+				public void onResponse ( Call< ZipCode > call,
+				                         Response< ZipCode > response )
+				{
+					ZipCode zip = response.body ( );
+					try
+					{
+						if( zip.getCep ( ) == null ){
+							textViewResponse.setText ( getString( R.string.no_zip) );
+						} else {
+							ShowMSG ( getString( R.string.success), 1 );
+							textViewResponse.setText ( zip.toString ( ) );
 						}
+
 					}
-					
-					@Override
-					public void onFailure ( Call< ZipCode > call, Throwable t ) {
-						ShowMSG ( "Erro ao buscar o cep:" + t.getMessage ( ), 0);
+					catch ( Exception e )
+					{
+						Log.e ( getString( R.string.error1),
+								getString( R.string.error2) + e.getMessage ( ) );
 					}
-				} );
-			}
+				}
+				
+				@Override
+				public void onFailure ( Call< ZipCode > call, Throwable t )
+				{
+					ShowMSG ( getString( R.string.error2) + t.getMessage ( ),
+							0 );
+				}
+			} );
 		}
 	}
+	}
 	
-	private void ShowMSG ( String msg, Integer time   )
+	private void ShowMSG ( String msg, Integer time )
 	{
-		if(time == 0)
+		if ( time == 0 )
 		{
-			Snackbar.make ( linearLayout, msg, Snackbar.LENGTH_LONG ).show ( );
+			Snackbar.make ( LinearLayout, msg, Snackbar.LENGTH_LONG ).show ( );
 		}
 		else
 		{
-			Snackbar.make ( linearLayout, msg, Snackbar.LENGTH_SHORT ).show ( );
+			Snackbar.make ( LinearLayout, msg, Snackbar.LENGTH_SHORT ).show ( );
 		}
 	}
 }

@@ -2,9 +2,9 @@ package wendreo.design.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties ({"codibge", "codestado"})
+@JsonIgnoreProperties ( { "codibge", "codestado" } )
 public class ZipCode {
-
+	
 	private String cep;
 	private String logradouro;
 	private String complemento;
@@ -12,61 +12,62 @@ public class ZipCode {
 	private String cidade;
 	private String estado;
 	
-	public String getCep() {
+	public String getCep ( ) {
 		return cep;
 	}
 	
-	public void setCep(String cep) {
+	public void setCep ( String cep ) {
 		this.cep = cep;
 	}
 	
-	public String getLogradouro() {
+	public String getLogradouro ( ) {
 		return logradouro;
 	}
 	
-	public void setLogradouro(String logradouro) {
+	public void setLogradouro ( String logradouro ) {
 		this.logradouro = logradouro;
 	}
 	
-	public String getComplemento() {
+	public String getComplemento ( ) {
 		return complemento;
 	}
 	
-	public void setComplemento(String complemento) {
+	public void setComplemento ( String complemento ) {
 		this.complemento = complemento;
 	}
 	
-	public String getBairro() {
+	public String getBairro ( ) {
 		return bairro;
 	}
 	
-	public void setBairro(String bairro) {
+	public void setBairro ( String bairro ) {
 		this.bairro = bairro;
 	}
 	
-	public String getCidade() {
+	public String getCidade ( ) {
 		return cidade;
 	}
 	
-	public void setCidade(String cidade) {
+	public void setCidade ( String cidade ) {
 		this.cidade = cidade;
 	}
 	
-	public String getEstado() {
+	public String getEstado ( ) {
 		return estado;
 	}
 	
-	public void setEstado(String estado) {
+	public void setEstado ( String estado ) {
 		this.estado = estado;
 	}
 	
 	@Override
-	public String toString() {
-		return "CEP: " + getCep()
-				+ "\nLogradouro: " + getLogradouro()
-				+ "\nComplemento: " + getComplemento()
-				+ "\nBairro: " + getBairro()
-				+ "\nCidade:" + getCidade()
-				+ "\nEstado: " + getEstado();
+	public String toString ( )
+	{
+		return "CEP: " + getCep ( )
+				+ "\nLogradouro: " + getLogradouro ( )
+				+ "\nComplemento: " + getComplemento ( )
+				+ "\nBairro: " + getBairro ( )
+				+ "\nCidade:" + getCidade ( )
+				+ "\nEstado: " + getEstado ( );
 	}
 }
