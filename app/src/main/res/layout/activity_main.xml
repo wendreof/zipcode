@@ -10,31 +10,33 @@
     tools:context=".views.MainActivity">
 
     <com.vicmikhailau.maskededittext.MaskedEditText
-        android:paddingTop="50dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/editTextZipCode"
         android:fontFamily="sans-serif-black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:digits="0123456789"
+        android:background="@drawable/round_et"
         android:hint="@string/type_zip_code"
         android:textAlignment="center"
         android:inputType="number"
         android:textColor="@color/colorAccent"
-        android:textSize="40sp"
+        android:textSize="38sp"
         app:mask="#####-###" />
 
     <Button
         android:id="@+id/btnSearch"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/round_btn"
         android:padding="10dp"
         android:paddingBottom="20dp"
         android:fontFamily="sans-serif"
         android:text="@string/search"
         android:textColor="#FDFDFD"
-        android:textSize="22sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textViewResponse"
